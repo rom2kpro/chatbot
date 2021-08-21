@@ -5,6 +5,7 @@ const PAGE_ACCESS_TOKEN = 'EAArRlZBmNGNgBABckY87f9HfbapiZC58NpwNTJiCZB5cHW9ERPeK
 const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
+const axios = require('axios')
 
 
 const app = express();
@@ -50,22 +51,33 @@ app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của ng
 
 // Đây là function dùng api của facebook để gửi tin nhắn
 function sendMessage(senderId, message) {
-  request({
-    url: 'https://graph.facebook.com/v11.0/me/messages',
-    qs: {
-      access_token: PAGE_ACCESS_TOKEN,
+
+  axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
+    recipient: {
+      id: senderId
     },
-    method: 'POST',
-    json: {
-      recipient: {
-        id: senderId
-      },
-      message: {
-        text: message
-      },
-    }
-  }
-);
+    message: {
+      text: message
+    },
+  }).then((response) => {
+    console.log(response);
+  })
+  // request({
+  //   url: 'https://graph.facebook.com/v11.0/me/messages',
+  //   qs: {
+  //     access_token: PAGE_ACCESS_TOKEN,
+  //   },
+  //   method: 'POST',
+  //   json: {
+  //     recipient: {
+  //       id: senderId
+  //     },
+  //     message: {
+  //       text: message
+  //     },
+  //   }
+  // }
+// );
 }
 
 app.set('port', process.env.PORT || 5000);
