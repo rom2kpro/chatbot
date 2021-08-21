@@ -30,20 +30,20 @@ app.get('/webhook', function(req, res) { // Đây là path để validate tooken
 });
 
 app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
-  var entries = req.body;
+  var entries = req.body.entry;
   console.log(entries);
-  // for (var entry of entries) {
-  //   var messaging = entry.messaging;
-  //   for (var message of messaging) {
-  //     var senderId = message.sender.id;
-  //     if (message.message) {
-  //       if (message.message.text) {
-  //         var text = message.message.text;
-  //         sendMessage(senderId, "Hello!! I'm a bot. Your message: " + text);
-  //       }
-  //     }
-  //   }Ư 
-  // }
+  for (var entry of entries) {
+    var messaging = entry.messaging;
+    for (var message of messaging) {
+      var senderId = message.sender.id;
+      if (message.message) {
+        if (message.message.text) {
+          var text = message.message.text;
+          sendMessage(senderId, "Hello!! I'm a bot. Your message: " + text);
+        }
+      }
+    } 
+  }
   res.status(200).send("OK");
 });
 
