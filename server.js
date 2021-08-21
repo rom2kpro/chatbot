@@ -61,6 +61,8 @@ function sendMessage(senderId, message) {
     },
   }).then((response) => {
     console.log(response);
+  }).catch((error) => {
+    console.log(error);
   })
   // request({
   //   url: 'https://graph.facebook.com/v11.0/me/messages',
