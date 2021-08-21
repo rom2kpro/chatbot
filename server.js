@@ -2,19 +2,21 @@ const APP_SECRET = '75a6128fd93452a887f81d224e67f30a';
 const VALIDATION_TOKEN = 'trungdeptrai';
 const PAGE_ACCESS_TOKEN = 'EAArRlZBmNGNgBAKQLBMQ8BA6P0SibpxFPdLPf3iLidhvrF5ZBG1auS8HkJzZBXnksLFcPECaJ5f7jtS3ofvTZAIPTh1KcNnZAYACXEOw5sUiHGGT4iwfNCMZCthw7hV4FVUVUEti67COHrA34s4R2heS01ObtZBawN7rs1VE9ZBRMWdzLAVmHJQy';
 
-var http = require('http');
-var bodyParser = require('body-parser');
-var express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const express = require('express');
 
 
-var app = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-var server = http.createServer(app);
-var request = require("request");
+app.use(bodyParser.json())
+
+const server = http.createServer(app);
+const request = require("request");
 
 app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
