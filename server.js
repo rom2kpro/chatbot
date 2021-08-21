@@ -35,6 +35,7 @@ app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của ng
   for (var entry of entries) {
     var messaging = entry.messaging;
     for (var message of messaging) {
+      console.log(message);
       var senderId = message.sender.id;
       if (message.message) {
         if (message.message.text) {
